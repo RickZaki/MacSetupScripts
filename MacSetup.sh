@@ -1,5 +1,16 @@
 #!/bin/bash
 
+
+
+echo "Setting System Preferences"
+#general
+defaults write -g 'AppleAquaColorVariant' -int 6
+defaults write -g 'NSQuitAlwaysKeepsWindows' -bool false
+osascript -e 'tell application "System Events" to tell appearance preferences to set recent applications limit to 0'
+osascript -e 'tell application "System Events" to tell appearance preferences to set recent documents limit to 0'
+osascript -e 'tell application "System Events" to tell appearance preferences to set recent servers limit to 0'
+
+
 echo "Setting Finder Settings"
 #general
 deafults write com.apple.finder ShowHardDrivesOnDesktop NO
