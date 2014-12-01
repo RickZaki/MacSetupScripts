@@ -1,1 +1,36 @@
 #!/bin/bash
+
+echo "Installing Xcode Command Line Tools"
+xcode-select --install
+sudo xcodebuild -license
+
+echo "Installing homebrew!!!"
+ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+brew doctor
+
+echo "Installing cask!!!"
+brew install caskroom/cask/brew-cask
+brew tap caskroom/versions
+
+
+echo "Installing essential applications"
+brew cask install --appdir="/Applications" bartender crashplan default-folder-x dropbox google-chrome google-drive istat-menus quicksilver skype synology-cloud-station teleport tinkertool usb-overdrive vmware-fusion
+
+echo "Installing Web developer applications"
+brew install node
+brew cask install --appdir=/Applications adobe-creative-cloud charles firefox google-chrome-canary mamp sequel-pro sourcetree transmit sublime-text
+npm install -g bower grunt-cli yo http-server less
+
+
+mv /Applications/Google\ Chrome.app /opt/homebrew-cask/Caskroom/google-chrome/latest/Google\ Chrome.app.alias
+mv /opt/homebrew-cask/Caskroom/google-chrome/latest/Google\ Chrome.app /Applications/Google\ Chrome.app
+mv /opt/homebrew-cask/Caskroom/google-chrome/latest/Google\ Chrome.app.alias /opt/homebrew-cask/Caskroom/google-chrome/latest/Google\ Chrome.app
+
+mv /Applications/Google\ Chrome\ Canary.app /opt/homebrew-cask/Caskroom/google-chrome-canary/latest/Google\ Chrome\ Canary.app.alias
+mv /opt/homebrew-cask/Caskroom/google-chrome-canary/latest/Google\ Chrome\ Canary.app /Applications/Google\ Chrome\ Canary.app
+mv /opt/homebrew-cask/Caskroom/google-chrome-canary/latest/Google\ Chrome\ Canary.app.alias /opt/homebrew-cask/Caskroom/google-chrome-canary/latest/Google\ Chrome\ Canary.app
+
+echo "Installing misc. applications"
+brew cask install --appdir="/Applications" airserver vlc
+
+chflags hidden /opt/
