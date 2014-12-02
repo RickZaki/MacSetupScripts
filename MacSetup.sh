@@ -1,14 +1,40 @@
 #!/bin/bash
 
 
+open /Applications/App\ Store.app
+
 
 echo "Setting System Preferences"
+
 #general
-defaults write -g 'AppleAquaColorVariant' -int 6
+defaults write -g 'AppleAquaColorVariant' -int 6 #Graphite
+sudo defaults write /Library/Preferences/.GlobalPreferences.plist _HIEnableThemeSwitchHotKey -bool true #Darkmode Toggle Keyboard Shortcut
 defaults write -g 'NSQuitAlwaysKeepsWindows' -bool false
 osascript -e 'tell application "System Events" to tell appearance preferences to set recent applications limit to 0'
 osascript -e 'tell application "System Events" to tell appearance preferences to set recent documents limit to 0'
 osascript -e 'tell application "System Events" to tell appearance preferences to set recent servers limit to 0'
+
+#Desktop & Screen Saver
+#Dock
+#Mission Control
+#Language & Region
+#Security & Privacy
+#Spotlight
+#Notifications
+#Displays
+#Energy Saver
+#Keyboard
+#Mouse
+#Trackpad
+
+#Printers & Scanners
+# there is a way to automate using lpadmin
+cupsctl WebInterface=yes
+open /System/Library/PreferencePanes/PrintAndScan.prefPane
+open http://127.0.0.1:631/printers
+osascript -e 'tell application "Finder"' -e 'display dialog "Are you done adding Printers?" buttons {"Yes, I am Done"}' -e 'do shell script "cupsctl WebInterface=no"' -e 'end tell'
+
+#Sound
 
 
 echo "Setting Finder Settings"
@@ -21,6 +47,7 @@ deafults write com.apple.finder AppleShowAllExtensions YES
 deafults write com.apple.finder FXEnableExtensionChangeWarning NO
 deafults write com.apple.finder WarnOnEmptyTrash NO
 deafults write com.apple.finder EmptyTrashSecurely YES
+
 
 
 echo "Installing Xcode Command Line Tools"
