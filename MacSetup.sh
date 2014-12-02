@@ -39,14 +39,14 @@ osascript -e 'tell application "Finder"' -e 'display dialog "Are you done adding
 
 echo "Setting Finder Settings"
 #general
-deafults write com.apple.finder ShowHardDrivesOnDesktop NO
-deafults write com.apple.finder ShowExternalHardDrivesOnDesktop YES
-deafults write com.apple.finder ShowRemovableMediaOnDesktop YES
+defaults write com.apple.finder ShowHardDrivesOnDesktop NO
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop YES
+defaults write com.apple.finder ShowRemovableMediaOnDesktop YES
 #advanced
-deafults write com.apple.finder AppleShowAllExtensions YES
-deafults write com.apple.finder FXEnableExtensionChangeWarning NO
-deafults write com.apple.finder WarnOnEmptyTrash NO
-deafults write com.apple.finder EmptyTrashSecurely YES
+defaults write com.apple.finder AppleShowAllExtensions YES
+defaults write com.apple.finder FXEnableExtensionChangeWarning NO
+defaults write com.apple.finder WarnOnEmptyTrash NO
+defaults write com.apple.finder EmptyTrashSecurely YES
 
 
 
