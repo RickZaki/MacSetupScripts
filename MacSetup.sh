@@ -107,7 +107,6 @@ brew doctor
 
 echo "Installing cask!!!"
 brew install caskroom/cask/brew-cask
-brew tap caskroom/versions
 
 
 echo "Installing essential applications"
