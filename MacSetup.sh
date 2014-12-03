@@ -11,20 +11,26 @@ sudo nvram SystemAudioVolume=" "
 
 echo "Setting System Preferences"
 
-#general
-defaults write -g 'AppleAquaColorVariant' -int 6 #Graphite
-sudo defaults write /Library/Preferences/.GlobalPreferences.plist _HIEnableThemeSwitchHotKey -bool true #Darkmode Toggle Keyboard Shortcut
-defaults write -g 'NSQuitAlwaysKeepsWindows' -bool false
+###############################################################################
+# General                                                                     #
+###############################################################################
+# Appearnace: Graphite
+defaults write -g 'AppleAquaColorVariant' -int 6
+# Close windows when quitting an app - unchecked
+defaults write -g 'NSQuitAlwaysKeepsWindows' -bool true
+# Recent Items: None
 osascript -e 'tell application "System Events" to tell appearance preferences to set recent applications limit to 0'
 osascript -e 'tell application "System Events" to tell appearance preferences to set recent documents limit to 0'
 osascript -e 'tell application "System Events" to tell appearance preferences to set recent servers limit to 0'
 
 #Desktop & Screen Saver
 
-#Dock
+###############################################################################
+# Dock                                                                     #
+###############################################################################
+#Show indicators for open applications - unchecked
 defaults write com.apple.dock show-process-indicators -bool false
-
-	# hacks
+# hacks
 defaults write com.apple.Dock mineffect scale
 defaults write com.apple.Dock showhidden -bool true
 killall Dock
@@ -60,8 +66,14 @@ open /System/Library/PreferencePanes/PrintAndScan.prefPane
 open http://127.0.0.1:631/printers
 osascript -e 'tell application "Finder"' -e 'display dialog "Are you done adding Printers?" buttons {"Yes, I am Done"}' -e 'do shell script "cupsctl WebInterface=no"' -e 'end tell'
 
-#Sound
+###############################################################################
+# Sound                                                                       #
+###############################################################################
+# Play feedback when volume is changed
+defaults write NSGlobalDomain com.apple.sound.beep.feedback -float 1
+# Show volume in menu bar
 defaults write com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/Volume.menu"
+
 #App Store
 
 echo "Setting Dock Settings"
