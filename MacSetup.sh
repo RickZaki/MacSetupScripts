@@ -6,11 +6,7 @@
 
 open /Applications/App\ Store.app
 
-# Disable the sound effects on boot
-sudo nvram SystemAudioVolume=" "
-
 echo "Setting System Preferences"
-
 ###############################################################################
 # General                                                                     #
 ###############################################################################
@@ -30,7 +26,7 @@ osascript -e 'tell application "System Events" to tell appearance preferences to
 ###############################################################################
 #Show indicators for open applications - unchecked
 defaults write com.apple.dock show-process-indicators -bool false
-# hacks
+### hacks
 defaults write com.apple.Dock mineffect scale
 defaults write com.apple.Dock showhidden -bool true
 killall Dock
@@ -73,7 +69,9 @@ osascript -e 'tell application "Finder"' -e 'display dialog "Are you done adding
 defaults write NSGlobalDomain com.apple.sound.beep.feedback -float 1
 # Show volume in menu bar
 defaults write com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/Volume.menu"
-
+### hacks
+# Disable the sound effects on boot
+sudo nvram SystemAudioVolume=" "
 #App Store
 
 echo "Setting Dock Settings"
