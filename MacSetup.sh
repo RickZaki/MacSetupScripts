@@ -4,9 +4,6 @@
 #https://raw.githubusercontent.com/mathiasbynens/dotfiles/master/.osx
 #https://github.com/paularmstrong/dotfiles/blob/master/osx/defaults.sh
 
-open /Applications/App\ Store.app
-
-
 echo "Setting System Preferences"
 
 ###############################################################################
@@ -31,7 +28,9 @@ defaults write com.apple.dock show-process-indicators -bool false
 # hacks
 defaults write com.apple.Dock mineffect scale
 defaults write com.apple.Dock showhidden -bool true
-killall Dock
+# remove all those pesky icons
+defaults write com.apple.dock persistent-apps -array
+killall -KILL Dock
 
 #Mission Control
 #Language & Region
@@ -73,10 +72,8 @@ defaults write NSGlobalDomain com.apple.sound.beep.feedback -float 1
 defaults write com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/Volume.menu"
 
 #App Store
+open /Applications/App\ Store.app
 
-echo "Setting Dock Settings"
-defaults write com.apple.dock persistent-apps -array
-killall -KILL Dock
 
 echo "Setting Finder Settings"
 ###############################################################################
