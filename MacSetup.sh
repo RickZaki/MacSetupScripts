@@ -6,6 +6,8 @@
 
 open /Applications/App\ Store.app
 
+# Disable the sound effects on boot
+sudo nvram SystemAudioVolume=" "
 
 echo "Setting System Preferences"
 
@@ -34,9 +36,22 @@ killall Dock
 #Notifications
 #Displays
 #Energy Saver
-#Keyboard
+###############################################################################
+# Keyboard                                                                    #
+###############################################################################
+# Enable full keyboard access for all controls
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+
 #Mouse
-#Trackpad
+
+###############################################################################
+# Trackpad                                                                    #
+###############################################################################
+# enable tap to click for this user and for the login screen
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
 
 #Printers & Scanners
 # there is a way to automate using lpadmin
@@ -46,22 +61,29 @@ open http://127.0.0.1:631/printers
 osascript -e 'tell application "Finder"' -e 'display dialog "Are you done adding Printers?" buttons {"Yes, I am Done"}' -e 'do shell script "cupsctl WebInterface=no"' -e 'end tell'
 
 #Sound
+defaults write com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/Volume.menu"
 #App Store
 
 echo "Setting Dock Settings"
-defaults write com.apple.dock persistent-apps ""
+defaults write com.apple.dock persistent-apps -array
 killall -KILL Dock
 
 echo "Setting Finder Settings"
-#general
+###############################################################################
+# Finder                                                                      #
+###############################################################################
+### general - tab
 defaults write com.apple.finder ShowHardDrivesOnDesktop NO
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop YES
 defaults write com.apple.finder ShowRemovableMediaOnDesktop YES
-#advanced
+#### advanced - tab
+# show all filename extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 defaults write com.apple.finder FXEnableExtensionChangeWarning NO
 defaults write com.apple.finder WarnOnEmptyTrash NO
 defaults write com.apple.finder EmptyTrashSecurely YES
+#views
+defaults write com.apple.finder ShowStatusBar -bool true
 killall Finder
 
 
@@ -97,5 +119,6 @@ mv /opt/homebrew-cask/Caskroom/google-chrome-canary/latest/Google\ Chrome\ Canar
 
 echo "Installing misc. applications"
 brew cask install --appdir="/Applications" airserver vlc
+brew cask cleanup
 
-chflags hidden /opt/
+sudo chflags hidden /opt/
