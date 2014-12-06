@@ -1,8 +1,12 @@
 #!/bin/bash
 
-#https://github.com/robb/.dotfiles/blob/master/osx/defaults.install
 #https://raw.githubusercontent.com/mathiasbynens/dotfiles/master/.osx
-#https://github.com/paularmstrong/dotfiles/blob/master/osx/defaults.sh
+#https://gist.githubusercontent.com/brandonb927/3195465/raw/376c300cba389908363391d8f2a23e72528dc54d/osx-for-hackers.sh
+##https://github.com/zenorocha/dotfiles
+
+# run software update
+sudo softwareupdate -ia
+
 
 echo "Setting System Preferences"
 
@@ -23,10 +27,14 @@ osascript -e 'tell application "System Events" to tell appearance preferences to
 ###############################################################################
 # Dock                                                                     #
 ###############################################################################
-#Show indicators for open applications - unchecked
-defaults write com.apple.dock show-process-indicators -bool false
-# hacks
+# Minimize windows using: Scale effect
 defaults write com.apple.Dock mineffect scale
+# Automatically hide and show the Dock
+defaults write com.apple.dock autohide -bool true
+# Show indicators for open applications - unchecked
+defaults write com.apple.dock show-process-indicators -bool false
+### hacks
+# Use transparent icons for hidden applications
 defaults write com.apple.Dock showhidden -bool true
 # remove all those pesky icons
 defaults write com.apple.dock persistent-apps -array
@@ -62,6 +70,11 @@ cupsctl WebInterface=yes
 open /System/Library/PreferencePanes/PrintAndScan.prefPane
 open http://127.0.0.1:631/printers
 osascript -e 'tell application "Finder"' -e 'display dialog "Are you done adding Printers?" buttons {"Yes, I am Done"}' -e 'do shell script "cupsctl WebInterface=no"' -e 'end tell'
+# Automatically quit printer app once the print jobs complete
+defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+# Expand print panel by default
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 
 ###############################################################################
 # Sound                                                                       #
@@ -78,23 +91,55 @@ sudo nvram SystemAudioVolume=" "
 open /Applications/App\ Store.app
 
 
+
+echo "Setting System wide"
+###############################################################################
+# System                                                                      #
+###############################################################################
+# Save to disk (not to iCloud) by default
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+# Expand save panel by default
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+
+
+
 echo "Setting Finder Settings"
 ###############################################################################
 # Finder                                                                      #
 ###############################################################################
-### general - tab
+### General - tab
 defaults write com.apple.finder ShowHardDrivesOnDesktop NO
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop YES
 defaults write com.apple.finder ShowRemovableMediaOnDesktop YES
-#### advanced - tab
-# show all filename extensions
+#### Advanced - tab
+# Show all filename extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+# Show warning before changing an extension - unchecked
 defaults write com.apple.finder FXEnableExtensionChangeWarning NO
+# Show warning before emptying the Trash - unchecked
 defaults write com.apple.finder WarnOnEmptyTrash NO
+# Empty Trash securely
 defaults write com.apple.finder EmptyTrashSecurely YES
-#views
+### views
+# View as Columns in all Finder windows by default
+defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+# Show Status Bar
 defaults write com.apple.finder ShowStatusBar -bool true
+### hacks
+# allow text selection in Quick Look
+defaults write com.apple.finder QLEnableTextSelection -bool true
+
 killall Finder
+
+
+
+###############################################################################
+# Safari                                                                      #
+###############################################################################
+### Advanced - tab
+# Show Develop menu in menu bar
+defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
 
 
 
