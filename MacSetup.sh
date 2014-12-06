@@ -157,6 +157,12 @@ brew install caskroom/cask/brew-cask
 echo "Installing essential applications"
 brew cask install --appdir="/Applications" crashplan default-folder-x dropbox google-chrome synology-cloud-station tinkertool usb-overdrive
 
-brew cask cleanup
+open /opt/homebrew-cask/Caskroom/default-folder-x/*/Default\ Folder\ X\ Installer.app
 
+rm /Applications/Google\ Chrome.app /opt/homebrew-cask/Caskroom/google-chrome/latest/Google\ Chrome.app.alias
+mv /opt/homebrew-cask/Caskroom/google-chrome/latest/Google\ Chrome.app /Applications/Google\ Chrome.app
+osascript -e 'tell application "Finder" to make alias file to POSIX file "/Applications/Google Chrome.app" at POSIX file "/opt/homebrew-cask/Caskroom/google-chrome/latest/"'
+
+
+brew cask cleanup
 sudo chflags hidden /opt/
