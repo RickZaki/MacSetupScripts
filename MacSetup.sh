@@ -178,6 +178,7 @@ npm install -g bower grunt-cli yo http-server less
 
 echo "Installing misc. applications"
 brew cask install --appdir="/Applications" airserver vlc
-brew cask cleanup
 
+
+brew cask cleanup
 sudo chflags hidden /opt/
