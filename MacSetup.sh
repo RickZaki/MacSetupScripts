@@ -109,9 +109,6 @@ echo "Setting Finder Settings"
 # Finder                                                                      #
 ###############################################################################
 ### General - tab
-defaults write com.apple.finder ShowHardDrivesOnDesktop NO
-defaults write com.apple.finder ShowExternalHardDrivesOnDesktop YES
-defaults write com.apple.finder ShowRemovableMediaOnDesktop YES
 #### Advanced - tab
 # Show all filename extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
@@ -160,24 +157,8 @@ brew cask install --appdir="/Applications" bartender crashplan default-folder-x 
 
 open /opt/homebrew-cask/Caskroom/default-folder-x/*/Default\ Folder\ X\ Installer.app
 
-rm /Applications/Google\ Chrome.app /opt/homebrew-cask/Caskroom/google-chrome/latest/Google\ Chrome.app.alias
 mv /opt/homebrew-cask/Caskroom/google-chrome/latest/Google\ Chrome.app /Applications/Google\ Chrome.app
 osascript -e 'tell application "Finder" to make alias file to POSIX file "/Applications/Google Chrome.app" at POSIX file "/opt/homebrew-cask/Caskroom/google-chrome/latest/"'
-
-
-echo "Installing Web developer applications"
-brew install node
-brew cask install --appdir=/Applications adobe-creative-cloud charles firefox google-chrome-canary mamp sequel-pro sourcetree transmit sublime-text
-
-rm /Applications/Google\ Chrome\ Canary.app /opt/homebrew-cask/Caskroom/google-chrome-canary/latest/Google\ Chrome\ Canary.app.alias
-mv /opt/homebrew-cask/Caskroom/google-chrome-canary/latest/Google\ Chrome\ Canary.app /Applications/Google\ Chrome\ Canary.app
-osascript -e 'tell application "Finder" to make alias file to POSIX file "/Applications/Google Chrome Canary.app" at POSIX file "/opt/homebrew-cask/Caskroom/google-chrome-canary/latest/"'
-
-npm install -g bower grunt-cli yo http-server less
-
-
-echo "Installing misc. applications"
-brew cask install --appdir="/Applications" airserver vlc
 
 
 brew cask cleanup
